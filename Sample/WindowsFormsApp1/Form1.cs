@@ -31,5 +31,20 @@ namespace WindowsFormsApp1 {
         private void tbNum1_TextChanged(object sender, EventArgs e) {
 
         }
+
+        private void label1_Click(object sender, EventArgs e) {
+
+        }
+        //イベントハンドラ
+        private void btPow_Click(object sender, EventArgs e) {
+            int num1 = Decimal.ToInt32(mudX.Value);
+            int num2 = Decimal.ToInt32(mudY.Value);
+            int power = num1;
+            for (int i = 0; i < num2 - 1; i++)
+            {
+                power = power * num1;
+            }
+            tbResult.Text = power.ToString();
+        }
     }
 }
