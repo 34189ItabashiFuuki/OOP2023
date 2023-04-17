@@ -37,14 +37,17 @@ namespace WindowsFormsApp1 {
         }
         //イベントハンドラ
         private void btPow_Click(object sender, EventArgs e) {
-            int num1 = Decimal.ToInt32(mudX.Value);
-            int num2 = Decimal.ToInt32(mudY.Value);
-            int power = num1;
-            for (int i = 0; i < num2 - 1; i++)
-            {
-                power = power * num1;
-            }
-            tbResult.Text = power.ToString();
+            //int num1 = Decimal.ToInt32(mudX.Value);
+            //int num2 = Decimal.ToInt32(mudY.Value);
+            //int power = num1;
+            //for (int i = 0; i < num2 - 1; i++)
+            //{
+            //    power = power * num1;
+            //}
+            //tbResult.Text = power.ToString();
+
+            tbResult.Text = (Math.Pow((double)mudX.Value, (double)mudY.Value)).ToString();
+           
         }
     }
 }
