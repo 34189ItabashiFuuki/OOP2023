@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BallApp {
-    class SoccerBall : Obj {
+    class TennisBall : Obj {
         private static int count;
         Random random = new Random(); //乱数インスタンス
         
         //コンストラクタ
-        public SoccerBall(double xp, double yp) : base(xp, yp, @"pic\soccer_ball.png") {
+        public TennisBall (double xp, double yp) : base(xp, yp, @"pic\tennis_ball.png") { 
             int rndX = random.Next(-25, 25);
             MoveX = (rndX != 0 ? rndX : 1);
             int rndY = random.Next(-25, 25);
@@ -22,8 +22,8 @@ namespace BallApp {
         public override void Move() {
             PosX += MoveX;
             PosY += MoveY;
-            if (PosX > 730 || PosX < 0){ MoveX *= -1;}
-            if (PosY > 500 || PosY < 0){ MoveY *= -1;} 
+            if (PosX > 730 || PosX < 0) { MoveX *= -1; }
+            if (PosY > 500 || PosY < 0) { MoveY *= -1; }
         }
     }
 }
