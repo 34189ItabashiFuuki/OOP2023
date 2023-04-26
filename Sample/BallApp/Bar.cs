@@ -17,7 +17,22 @@ namespace BallApp {
             ;//空のメソッドにする
         }
         public void Move( Keys direction ) {
-            PosX += 20;
+            if(direction == Keys.Right)
+            {
+                if (PosX < 635)
+                {
+                    PosX += MoveX;
+                }
+
+            }
+            if (direction == Keys.Left)
+            {
+                if (PosX > 0)
+                {
+                    PosX -= MoveX;
+                }
+
+            }
         }
 
     }
