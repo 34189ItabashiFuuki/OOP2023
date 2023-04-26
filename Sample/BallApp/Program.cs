@@ -84,7 +84,7 @@ namespace BallApp {
         //タイマータイムアウト時のイベントハンドラ
         private void MoveTimer_Tick(object sender,EventArgs e) {
             for (int i = 0; i < balls.Count; i++){
-                balls[i].Move(); //移動
+                balls[i].Move(pbBar,pbs[i]); //移動
                 pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY); //画像の位置
             }   
         } 

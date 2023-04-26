@@ -9,31 +9,26 @@ namespace BallApp {
     class Bar : Obj {
     
         public Bar(double xp, double yp) : base(350,400,@"pic\bar.png") {
-            base.MoveX = 10;
+            base.MoveX = 70;
             base.MoveY = 0;
         }
         //抽象クラスを継承しているので、不要なメソッドは空にする
-        public override void Move() {
+        public override void Move(PictureBox pbBar, PictureBox pbBall) {
             ;//空のメソッドにする
         }
-        public void Move( Keys direction ) {
-            if(direction == Keys.Right)
-            {
-                if (PosX < 635)
-                {
+        public override void Move( Keys direction ) {
+            if(direction == Keys.Right){
+                if (PosX < 635){
                     PosX += MoveX;
                 }
-
             }
-            if (direction == Keys.Left)
-            {
-                if (PosX > 0)
-                {
+            if (direction == Keys.Left){
+                if (PosX > 0){
                     PosX -= MoveX;
                 }
-
             }
+           
         }
-
+        
     }
 }

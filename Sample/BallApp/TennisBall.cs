@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BallApp {
     class TennisBall : Obj {
@@ -20,12 +21,23 @@ namespace BallApp {
             Count++;
         }
         //メソッド
-        public override void Move() {
+        public override void Move(PictureBox pbBar, PictureBox pbBall) {
+
+            Rectangle rBar = new Rectangle(pbBar.Location.X, pbBar.Location.Y, pbBar.Width, pbBar.Height);
+            Rectangle rBall = new Rectangle(pbBall.Location.X, pbBall.Location.Y, pbBall.Width, pbBall.Height);
+
+            
+            if (PosX > 730 || PosX < 0 ) {
+                MoveX = -MoveX; 
+            }
+            if (PosY > 500 || PosY < 0 || rBar.IntersectsWith(rBall)) { 
+                MoveY = -MoveY; 
+            }
             PosX += MoveX;
             PosY += MoveY;
-            if (PosX > 730 || PosX < 0) { MoveX *= -1; }
-            if (PosY > 500 || PosY < 0) { MoveY *= -1; }
         }
-
+        public override void Move(Keys direction) {
+            ;
+        }
     }
 }
