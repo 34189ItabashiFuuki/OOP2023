@@ -9,6 +9,8 @@ namespace ProductSample {
     class Program {
         static void Main(string[] args) {
 
+            string[] DayOfWeekJp = { "日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日" };
+
             #region P26のサンプルプログラム
             //インスタンスを生成
             //Product karinto = new Product(123, "かりんとう", 180);
@@ -43,13 +45,15 @@ namespace ProductSample {
             int day = int.Parse(Console.ReadLine());
 
             DateTime birthday = new DateTime(seireki, month, day);
-            DateTime today = new DateTime(2023, 5, 9);
+            DateTime today = DateTime.Today;
 
             TimeSpan interval = today - birthday;
-
             Console.Write("あなたは生まれてから今日まで{0}日目です。", interval.Days);
 
+            Console.WriteLine(DayOfWeekJp[(int)birthday.DayOfWeek]);
             #endregion
+
+
         }
     }
 }
