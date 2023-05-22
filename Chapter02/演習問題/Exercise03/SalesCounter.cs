@@ -14,8 +14,21 @@ namespace Exercise03 {
         public SalesCounter(string filepath) {
             _sales = ReadSales(filepath);
         }
+        
         //店舗別売上を求める
         public IDictionary<string, int> GetPerStoreSales() {
+            var dict = new SortedDictionary<string, int>();
+            foreach (var sale in _sales)
+            {
+                if (dict.ContainsKey(sale.ShopName))
+                    dict[sale.ShopName] += sale.Amount; //店名が既に存在する
+                else
+                    dict[sale.ShopName] = sale.Amount;//店名が存在しない 
+            }
+            return dict;
+        }
+        //カテゴリー別売上
+        public IDictionary<string, int> GetPerProductCategorys() {
             var dict = new SortedDictionary<string, int>();
             foreach (var sale in _sales)
             {

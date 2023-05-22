@@ -7,11 +7,25 @@ using System.Threading.Tasks;
 namespace Exercise03 {
     class Program {
         static void Main(string[] args) {
+            Console.WriteLine("１：店舗別売上");
+            Console.WriteLine("２：商品カテゴリー別売上");
+            int count = int.Parse(Console.ReadLine());
             var sales = new SalesCounter(@"data\sales.csv");
-            var amountPerStone = sales.GetPerStoreSales();
-            foreach (var obj in amountPerStone)
+            if (count == 1)
             {
-                Console.WriteLine("{0} {1:#,#}", obj.Key, obj.Value);
+                var amountPerStone = sales.GetPerStoreSales();
+                foreach (var obj in amountPerStone)
+                {
+                    Console.WriteLine("{0} {1:#,#}", obj.Key, obj.Value);
+                }
+            }
+            else
+            {
+                var amountPerCategory = sales.GetPerProductCategorys();
+                foreach (var obj in amountPerCategory)
+                {
+                    Console.WriteLine("{0} {1:#,#}", obj.Key, obj.Value);
+                }
             }
         }
     }
