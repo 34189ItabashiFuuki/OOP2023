@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 namespace Exercise03 {
     class Program {
         static void Main(string[] args) {
+            var sales = new SalesCounter(@"data\sales.csv");
+            var amountPerStone = sales.GetPerStoreSales();
+            foreach (var obj in amountPerStone)
+            {
+                Console.WriteLine("{0} {1:#,#}", obj.Key, obj.Value);
+            }
         }
     }
 }
