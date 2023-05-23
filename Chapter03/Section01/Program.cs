@@ -11,20 +11,16 @@ namespace Section01 {
 
         static void Main(string[] args) {
             var numbers = new[] { 5, 3, 9, 6, 7, 5, 8, 1, 0, 5, 10, 4 };
-            int count = Count(numbers, delegate (int n) { return n % 2 == 0; });
-            Console.WriteLine(count);
+            //５の倍数をカウントする 
+            //int count = numbers.Count (n => 3 <= n && n < 8);
+
+            //合計値
+            var sum = numbers.Where(n => n % 2 == 0).Average();
+            
+
+            Console.WriteLine(sum);
         }
 
-        static public  int Count( int[] numbers, Predicate<int> judge)  {
-            int count = 0;
-            foreach(var n in numbers)
-            {
-                if(judge(n) == true)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
+        
     }
 }
