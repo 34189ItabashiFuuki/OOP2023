@@ -26,6 +26,16 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_1(List<int> numbers) {
+            var exists = numbers.Exists(s => s % 8 || s % 9 == 0);
+            if (exists)
+            {
+                Console.WriteLine("存在します");
+            }
+            else
+            {
+                Console.WriteLine("存在しません");
+            }
+            
         }
 
         private static void Exercise1_2(List<int> numbers) {
