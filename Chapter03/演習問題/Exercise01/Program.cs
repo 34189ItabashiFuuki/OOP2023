@@ -33,7 +33,6 @@ namespace Exercise01 {
             else{
                 Console.WriteLine("存在しません");
             }
-            
         }
 
         private static void Exercise1_2(List<int> numbers) {
@@ -51,7 +50,6 @@ namespace Exercise01 {
             var query = numbers.Select(n => n*2).ToList();
             foreach (var n in query){
                 Console.WriteLine("{0}", n);
-
             }
         }
     }
