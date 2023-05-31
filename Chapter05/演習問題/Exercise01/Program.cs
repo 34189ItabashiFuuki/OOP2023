@@ -12,9 +12,11 @@ namespace Exercise01 {
 
             Console.Write("文字列２：");
             var s2 = Console.ReadLine();
-            if(String.Compare(s1,s2,true) == 0)
-            {
-                Console.WriteLine("等しい")
+            if(String.Compare(s1,s2,true) == 0){
+                Console.WriteLine("等しい");
+            }
+            else{
+                Console.WriteLine("等しくない");
             }
         }
     }
