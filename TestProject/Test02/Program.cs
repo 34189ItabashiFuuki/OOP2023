@@ -51,15 +51,17 @@ namespace Test02 {
         //問題３　昇順に並べて表示（遅延実行とする）
         //　　　　出力結果【12 14 17 20 31 35 40 48 53 76 87 91 94】
         private static void Exercise03(List<int> numbers) {
-
-
-
+            var sortednums = numbers.OrderBy( n => n );
+            foreach (var nums in sortednums)
+                Console.Write(nums + " ");
         }
 
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
         //　　　　出力結果【12 14 20 40 35 31 17 48】
         private static void Exercise04(List<int> numbers) {
-
+            var nums = numbers.Where(n => n >=  10 && n <= 50);
+            foreach (var num in nums)
+                Console.Write(num + " ");
 
 
         }
