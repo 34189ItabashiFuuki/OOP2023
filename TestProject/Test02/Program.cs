@@ -62,8 +62,6 @@ namespace Test02 {
             var nums = numbers.Where(n => n >=  10 && n <= 50);
             foreach (var num in nums)
                 Console.Write(num + " ");
-
-
         }
     }
 }
