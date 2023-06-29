@@ -4,27 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Section01 {
+namespace Section02 {
     class Program {
         static void Main(string[] args) {
-            /*var flowerDict = new Dictionary<string, int>() {
-                ["sunflower"] = 400,
-                ["pansy"] = 300,
-                ["tulip"] = 350,
-                ["rose"] = 500,
-                ["dahliia"] = 450,
-            };
-
-            //morning glory(あさがお)250円を追加
-            flowerDict["morning glory"] = 250;
-
-            Console.WriteLine("ひまわりの価格は{0}円です。", flowerDict["sunflower"]);
-            Console.WriteLine("チューリップの価格は{0}円です。", flowerDict["tulip"]);
-            Console.WriteLine("あさがおの価格は{0}円です。", flowerDict["morning glory"]);*/
-
-            var prefDict = new Dictionary<string,CityInfo>();
+            var prefDict = new Dictionary<string, CityInfo>();
             string pref;
-            
 
             Console.WriteLine("県庁所在地の登録");
             Console.Write("県名：");
@@ -32,11 +16,11 @@ namespace Section01 {
 
             while (pref != "999") {
                 var cityinfo = new CityInfo();
-                Console.Write("所在地：");
+                Console.Write("都市：");
                 cityinfo.City = Console.ReadLine();
                 Console.Write("人口：");
-                cityinfo.Population =int.Parse(Console.ReadLine());
-                
+                cityinfo.Population = int.Parse(Console.ReadLine());
+
                 if (prefDict.ContainsKey(pref)) {
                     Console.WriteLine("既に登録してあります。上書きしますか？");
                     Console.Write("はい / いいえ : ");
@@ -60,7 +44,7 @@ namespace Section01 {
                     Console.WriteLine("{0}【{1}(人口：{2}人)】", item.Key, item.Value.City, item.Value.Population);
                 }
             }
-            else {
+            else{
                 Console.Write("県名：");
                 pref = Console.ReadLine();
                 Console.WriteLine("所在地：{0}", prefDict[pref].City);
