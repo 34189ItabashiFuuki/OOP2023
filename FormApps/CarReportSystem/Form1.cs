@@ -12,7 +12,7 @@ namespace CarReportSystem {
     public partial class Form1 : Form {
         //管理用データ
         BindingList<CarReport> CarReports = new BindingList<CarReport>();
-
+        private uint mode;
         public Form1() {
             InitializeComponent();
             dgvCarReports.DataSource = CarReports;
@@ -128,15 +128,19 @@ namespace CarReportSystem {
         }
 
         private void btImageOpen_Click(object sender, EventArgs e) {
-            ofdImageFileOpen.ShowDialog();
+            if (ofdImageFileOpen.ShowDialog() == DialogResult.OK)
+                pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
+
+
+
+
             pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
         }
 
         private void btDeleteReport_Click(object sender, EventArgs e) {
             CarReports.RemoveAt(dgvCarReports.CurrentRow.Index);
 
-            if (dgvCarReports.Rows.Count == 0)
-            {
+            if (dgvCarReports.Rows.Count == 0) {
                 btModifyReport.Enabled = false;
                 btDeleteReport.Enabled = false;
             }
@@ -144,16 +148,17 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
-
         }
 
         private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
-            cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
-            setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
-            cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
-            tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
-            pbCarImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
+            if(0 < dgvCarReports.RowCount) {
+                dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
+                cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
+                setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
+                cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
+                tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
+                pbCarImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
+            }
         }
 
         private void btModifyReport_Click(object sender, EventArgs e) {
@@ -203,6 +208,16 @@ namespace CarReportSystem {
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if(cdColor.ShowDialog() == DialogResult.OK)
                 BackColor = cdColor.Color;
+        }
+
+        private void btScaleChange_Click(object sender, EventArgs e) {
+            mode = mode < 4 ? ++mode : 0;
+            pbCarImage.SizeMode = (PictureBoxSizeMode)mode++;
+        }
+
+        private void btImageDelete_Click(object sender, EventArgs e) {
+            pbCarImage.Image = null;
+
         }
     }
 }
