@@ -24,15 +24,19 @@ namespace CarReportSystem {
         }
         //追加ボタンがクリックされた時のイベントハンドラー
         private void btAddReport_Click(object sender, EventArgs e) {
-            if(cbAuthor.Text.Equals("")) {
+            if (cbAuthor.Text.Equals(""))
+            {
                 tsInfoText.Text = "記録者を記録してください";
                 return;
-            }else if(cbCarName.Text.Equals("")) {
+            }
+            else if (cbCarName.Text.Equals(""))
+            {
                 tsInfoText.Text = "車名を入力してください";
                 return;
             }
-            
-            var CarReport = new CarReport {
+
+            var CarReport = new CarReport
+            {
                 Date = dtpDate.Value,
                 Author = cbAuthor.Text,
                 Maker = getSelectedMaker(),
@@ -40,12 +44,25 @@ namespace CarReportSystem {
                 Report = tbReport.Text,
                 CarImage = pbCarImage.Image
             };
+            setCbAuther(cbAuthor.Text); //記録者コンボボックスの履歴登録処理
+            setCbCarName(cbCarName.Text); //車名コンボボックスの履歴登録処理
+
             CarReports.Add(CarReport);
-            dgvCarReports.DataSource = CarReports;
-            Clear();
+            Clear(); //項目クリア処理
             btModifyReport.Enabled = true;
             btDeleteReport.Enabled = true;
         }
+        //記録者コンボボックスの履歴登録処理
+        private void setCbAuther(string auther) {
+            if (!cbAuthor.Items.Contains(auther))
+                cbAuthor.Items.Add(auther);
+        }
+        //車名コンボボックスの履歴登録処理
+        private void setCbCarName(string carname) {
+            if (!cbCarName.Items.Contains(carname))
+                cbCarName.Items.Add(carname);
+        }
+        //項目クリア処理
         private CarReport.MakerGroup getSelectedMaker() {
             int tag = 0;
             foreach (var item in gbMaker.Controls) {
@@ -180,7 +197,12 @@ namespace CarReportSystem {
 
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
             var vf = new VersionForm();
-            vf.ShowDialog(); //モーダルダイヤログとして
+            vf.ShowDialog(); //モーダルダイアログとして
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(cdColor.ShowDialog() == DialogResult.OK)
+                BackColor = cdColor.Color;
         }
     }
 }
