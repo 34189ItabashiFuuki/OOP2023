@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
         //管理用データ
         BindingList<CarReport> CarReports = new BindingList<CarReport>();
         private uint mode;
+
+        //設定情報保存用オブジェクト
+        Settings settings = new Settings();
+
         public Form1() {
             InitializeComponent();
             dgvCarReports.DataSource = CarReports;
@@ -24,19 +30,16 @@ namespace CarReportSystem {
         }
         //追加ボタンがクリックされた時のイベントハンドラー
         private void btAddReport_Click(object sender, EventArgs e) {
-            if (cbAuthor.Text.Equals(""))
-            {
+            if (cbAuthor.Text.Equals("")) {
                 tsInfoText.Text = "記録者を記録してください";
                 return;
             }
-            else if (cbCarName.Text.Equals(""))
-            {
+            else if (cbCarName.Text.Equals("")) {
                 tsInfoText.Text = "車名を入力してください";
                 return;
             }
 
-            var CarReport = new CarReport
-            {
+            var CarReport = new CarReport {
                 Date = dtpDate.Value,
                 Author = cbAuthor.Text,
                 Maker = getSelectedMaker(),
@@ -148,6 +151,15 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
+
+            //逆シリアル化
+            using (var reader = XmlReader.Create("settings.xml"))
+            {
+                var serializer = new XmlSerializer(typeof(Settings));
+                settings = serializer.Deserialize(reader) as Settings;
+                BackColor = Color.FromArgb(settings.MainFormColor);
+
+            }
         }
 
         private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -178,7 +190,6 @@ namespace CarReportSystem {
                 CarReports[dgvCarReports.CurrentRow.Index].Report = tbReport.Text;
                 dgvCarReports.Refresh();    //一覧更新
             }
-
         }
 
         private void 終了XToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -197,7 +208,6 @@ namespace CarReportSystem {
                     ((RadioButton)item).Checked = false;
                 }
             }
-
         }
 
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -206,18 +216,30 @@ namespace CarReportSystem {
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            if(cdColor.ShowDialog() == DialogResult.OK)
+            if (cdColor.ShowDialog() == DialogResult.OK) { 
                 BackColor = cdColor.Color;
+                settings.MainFormColor = cdColor.Color.ToArgb();
+            }
         }
 
         private void btScaleChange_Click(object sender, EventArgs e) {
-            mode = mode < 4 ? ++mode : 0;
+            mode = mode < 4 ? ((mode == 1) ? 3 : ++mode) : 0; //AutoSize(2)を除外
             pbCarImage.SizeMode = (PictureBoxSizeMode)mode++;
         }
 
         private void btImageDelete_Click(object sender, EventArgs e) {
             pbCarImage.Image = null;
 
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+
+            //設定ファイルのシリアル化
+            using (var writer = XmlWriter.Create("settings.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+
+            }
         }
     }
 }
