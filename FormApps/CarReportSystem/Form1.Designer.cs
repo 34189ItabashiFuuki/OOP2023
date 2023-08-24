@@ -25,6 +25,7 @@ namespace CarReportSystem {
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
@@ -68,6 +69,8 @@ namespace CarReportSystem {
             this.tsInfoText = new System.Windows.Forms.ToolStripStatusLabel();
             this.cdColor = new System.Windows.Forms.ColorDialog();
             this.btScaleChange = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.tstimetext = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -445,6 +448,7 @@ namespace CarReportSystem {
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tstimetext,
             this.tsInfoText});
             this.statusStrip1.Location = new System.Drawing.Point(0, 457);
             this.statusStrip1.Name = "statusStrip1";
@@ -456,8 +460,8 @@ namespace CarReportSystem {
             // tsInfoText
             // 
             this.tsInfoText.Name = "tsInfoText";
-            this.tsInfoText.Size = new System.Drawing.Size(118, 17);
-            this.tsInfoText.Text = "toolStripStatusLabel1";
+            this.tsInfoText.Size = new System.Drawing.Size(82, 17);
+            this.tsInfoText.Text = "インフォメーション";
             // 
             // btScaleChange
             // 
@@ -468,6 +472,17 @@ namespace CarReportSystem {
             this.btScaleChange.Text = "サイズ変更";
             this.btScaleChange.UseVisualStyleBackColor = true;
             this.btScaleChange.Click += new System.EventHandler(this.btScaleChange_Click);
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // tstimetext
+            // 
+            this.tstimetext.Name = "tstimetext";
+            this.tstimetext.Size = new System.Drawing.Size(55, 17);
+            this.tstimetext.Text = "時刻表示";
             // 
             // Form1
             // 
@@ -502,6 +517,7 @@ namespace CarReportSystem {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
+            this.Text = "カーレポート管理システム";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).EndInit();
@@ -562,6 +578,8 @@ namespace CarReportSystem {
         private System.Windows.Forms.ToolStripMenuItem バージョン情報ToolStripMenuItem;
         private System.Windows.Forms.ColorDialog cdColor;
         private System.Windows.Forms.Button btScaleChange;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ToolStripStatusLabel tstimetext;
     }
 }
 

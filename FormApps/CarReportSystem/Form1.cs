@@ -150,6 +150,11 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+
+            tsInfoText.Text = ""; //情報表示領域のテキストを初期化
+            tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
+            timer.Start();
+
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
 
             //逆シリアル化
@@ -240,6 +245,10 @@ namespace CarReportSystem {
                 serializer.Serialize(writer, settings);
 
             }
+        }
+
+        private void timer_Tick(object sender, EventArgs e) {
+            tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
         }
     }
 }
