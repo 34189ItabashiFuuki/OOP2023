@@ -66,11 +66,13 @@ namespace CarReportSystem {
             this.gbMaker = new System.Windows.Forms.GroupBox();
             this.ofdImageFileOpen = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tstimetext = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsInfoText = new System.Windows.Forms.ToolStripStatusLabel();
             this.cdColor = new System.Windows.Forms.ColorDialog();
             this.btScaleChange = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.tstimetext = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ofdCarRepoOpen = new System.Windows.Forms.OpenFileDialog();
+            this.sfdCarRepoSave = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -367,31 +369,33 @@ namespace CarReportSystem {
             // 
             this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
             this.開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.開くToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.開くToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.開くToolStripMenuItem.Text = "開く(&O)...";
+            this.開くToolStripMenuItem.Click += new System.EventHandler(this.開くToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
             this.保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存ToolStripMenuItem.Text = "保存(&S)...";
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // 終了XToolStripMenuItem
             // 
             this.終了XToolStripMenuItem.Name = "終了XToolStripMenuItem";
             this.終了XToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.終了XToolStripMenuItem.Text = "終了(&X)";
             this.終了XToolStripMenuItem.Click += new System.EventHandler(this.終了XToolStripMenuItem_Click);
             // 
@@ -457,6 +461,12 @@ namespace CarReportSystem {
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // tstimetext
+            // 
+            this.tstimetext.Name = "tstimetext";
+            this.tstimetext.Size = new System.Drawing.Size(55, 17);
+            this.tstimetext.Text = "時刻表示";
+            // 
             // tsInfoText
             // 
             this.tsInfoText.Name = "tsInfoText";
@@ -478,11 +488,9 @@ namespace CarReportSystem {
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // tstimetext
+            // ofdCarRepoOpen
             // 
-            this.tstimetext.Name = "tstimetext";
-            this.tstimetext.Size = new System.Drawing.Size(55, 17);
-            this.tstimetext.Text = "時刻表示";
+            this.ofdCarRepoOpen.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -580,6 +588,8 @@ namespace CarReportSystem {
         private System.Windows.Forms.Button btScaleChange;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ToolStripStatusLabel tstimetext;
+        private System.Windows.Forms.OpenFileDialog ofdCarRepoOpen;
+        private System.Windows.Forms.SaveFileDialog sfdCarRepoSave;
     }
 }
 

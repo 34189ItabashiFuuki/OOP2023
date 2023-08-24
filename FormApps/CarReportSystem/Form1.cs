@@ -158,8 +158,7 @@ namespace CarReportSystem {
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
 
             //逆シリアル化
-            using (var reader = XmlReader.Create("settings.xml"))
-            {
+            using (var reader = XmlReader.Create("settings.xml")) {
                 var serializer = new XmlSerializer(typeof(Settings));
                 settings = serializer.Deserialize(reader) as Settings;
                 BackColor = Color.FromArgb(settings.MainFormColor);
@@ -168,7 +167,7 @@ namespace CarReportSystem {
         }
 
         private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if(0 < dgvCarReports.RowCount) {
+            if (0 < dgvCarReports.RowCount) {
                 dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
                 cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
                 setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
@@ -221,7 +220,7 @@ namespace CarReportSystem {
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (cdColor.ShowDialog() == DialogResult.OK) { 
+            if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
                 settings.MainFormColor = cdColor.Color.ToArgb();
             }
@@ -249,6 +248,17 @@ namespace CarReportSystem {
 
         private void timer_Tick(object sender, EventArgs e) {
             tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (sfdCarRepoSave.ShowDialog() == DialogResult.OK) {
+            }
+        }
+
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(ofdCarRepoOpen.ShowDialog() == DialogResult.OK) {
+
+            }
         }
     }
 }
