@@ -13,11 +13,11 @@ namespace Exercise02 {
 
             }
         }
-        public static DateTime NextWeek(DateTime date, DayOfWeek dayOfWeek) {
+        /*public static DateTime (DateTime date, DayOfWeek dayOfWeek) {
             var weeks = (int)dayOfWeek - (int)(date.DayOfWeek);
 
             
 
-        }
+        }*/
     }
 }

@@ -68,6 +68,19 @@ namespace CarReportSystem {
                 cbCarName.Items.Add(carname);
         }
         //項目クリア処理
+        private void editItemsClear() {
+            cbAuthor.Text = " ";
+            setSelectedMaker(CarReport.MakerGroup.トヨタ);
+            cbCarName.Text = " ";
+            tbReport.Text = " ";
+            pbCarImage.Image = null;
+
+            dgvCarReports.ClearSelection();     //選択解除
+            btModifyReport.Enabled = false;     //修正ボタン
+            btDeleteReport.Enabled = false;     //削除ボタン
+        }
+
+        //ラジオボタンで選択されているメーカーを返却
         private CarReport.MakerGroup getSelectedMaker() {
             int tag = 0;
             foreach (var item in gbMaker.Controls) {
@@ -153,6 +166,9 @@ namespace CarReportSystem {
             tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
             timer.Start();
 
+            dgvCarReports.RowsDefaultCellStyle.BackColor = Color.LightGreen;
+            dgvCarReports.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite; //奇数行の色を上書き
+
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
 
             try {
@@ -168,7 +184,7 @@ namespace CarReportSystem {
             }
         }
 
-        private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvCarReports_Click(object sender, DataGridViewCellEventArgs e) {
             if (0 < dgvCarReports.RowCount) {
                 dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
                 cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
@@ -277,10 +293,14 @@ namespace CarReportSystem {
                         dgvCarReports.DataSource = null;
                         dgvCarReports.DataSource = CarReports;
 
-                        foreach(var carReport in CarReports) {
+                        editItemsClear();
+                        dgvCarReports.Columns[5].Visible = false;   //画像項目非表示
+                        foreach (var carReport in CarReports) {
                             setCbAuther(carReport.Author);
                             setCbCarName(carReport.CarName);
                         }
+
+                        
                     }
                 }
                 catch (Exception ex) {
@@ -289,6 +309,8 @@ namespace CarReportSystem {
                 
             }
         }
+
+        
     }
 }
 
