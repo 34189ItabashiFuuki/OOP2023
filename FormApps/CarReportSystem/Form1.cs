@@ -13,17 +13,17 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace CarReportSystem {
-    public partial class Form1 : Form {
+    public partial class btConnection : Form {
         //管理用データ
         BindingList<CarReport> CarReports = new BindingList<CarReport>();
         private uint mode;
 
         //設定情報保存用オブジェクト
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
-        public Form1() {
+        public btConnection() {
             InitializeComponent();
-            dgvCarReports.DataSource = CarReports;
+            //dgvCarReports.DataSource = CarReports;
         }
 
         private void statasLabelDisp(string msg = "") {
@@ -161,6 +161,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+           
 
             tsInfoText.Text = ""; //情報表示領域のテキストを初期化
             tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
@@ -185,7 +186,7 @@ namespace CarReportSystem {
         }
 
         private void dgvCarReports_Click(object sender, DataGridViewCellEventArgs e) {
-            if (0 < dgvCarReports.RowCount) {
+            if (0 != dgvCarReports.RowCount) {
                 dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
                 cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
                 setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
@@ -310,7 +311,17 @@ namespace CarReportSystem {
             }
         }
 
-        
+        private void carReportTableBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportTableBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202320DataSet);
+
+        }
+        //接続ボタン
+        private void button1_Click(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202320DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportTableTableAdapter.Fill(this.infosys202320DataSet.CarReportTable);
+        }
     }
 }
 
