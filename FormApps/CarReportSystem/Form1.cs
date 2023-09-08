@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -36,21 +37,20 @@ namespace CarReportSystem {
                 return;
             }
 
-            var CarReport = new CarReport {
-                Date = dtpDate.Value,
-                Author = cbAuthor.Text,
-                Maker = getSelectedMaker(),
-                CarName = cbCarName.Text,
-                Report = tbReport.Text,
-                CarImage = pbCarImage.Image
-            };
+            DataRow newRow = infosys202320DataSet.CarReportTable.NewRow();
+            newRow[1] = dtpDate.Value;
+            newRow[2] = cbAuthor.Text;
+            newRow[3] = getSelectedMaker();
+            newRow[4] = cbCarName.Text;
+            newRow[5] = tbReport.Text;
+            newRow[6] = pbCarImage.Image;
+
+            infosys202320DataSet.CarReportTable.Rows.Add(newRow);
+            this.carReportTableTableAdapter.Update(infosys202320DataSet.CarReportTable);
             setCbAuther(cbAuthor.Text); //記録者コンボボックスの履歴登録処理
             setCbCarName(cbCarName.Text); //車名コンボボックスの履歴登録処理
 
-            CarReports.Add(CarReport);
             Clear(); //項目クリア処理
-            btModifyReport.Enabled = true;
-            btDeleteReport.Enabled = true;
         }
         //記録者コンボボックスの履歴登録処理
         private void setCbAuther(string auther) {
@@ -145,19 +145,14 @@ namespace CarReportSystem {
                 pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
             pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
         }
-
+        //削除ボタンイベントハンドラ
         private void btDeleteReport_Click(object sender, EventArgs e) {
-            CarReports.RemoveAt(dgvCarReports.CurrentRow.Index);
-
-            if (dgvCarReports.Rows.Count == 0) {
-                btModifyReport.Enabled = false;
-                btDeleteReport.Enabled = false;
-            }
+            dgvCarReports.Rows.RemoveAt(dgvCarReports.CurrentRow.Index);
+            carReportTableTableAdapter.Update(infosys202320DataSet.CarReportTable);
+            editItemsClear();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
-
             tsInfoText.Text = ""; //情報表示領域のテキストを初期化
             tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
             timer.Start();
@@ -286,43 +281,11 @@ namespace CarReportSystem {
         }
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (sfdCarRepoSave.ShowDialog() == DialogResult.OK) {
-                try {
-                    //バイナリ形式でシリアル化
-                    var bf = new BinaryFormatter();
-                    using (FileStream fs = File.Open(sfdCarRepoSave.FileName, FileMode.Create)) {
-                        bf.Serialize(fs, CarReports);
-                    }
-                }
-                catch (Exception ex) {
-                    MessageBox.Show(ex.Message);
-                }
-            }
+            
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (ofdCarRepoOpen.ShowDialog() == DialogResult.OK) {
-                try {
-                    //逆シリアル化でバイナリ形式を取り込む
-                    var bf = new BinaryFormatter();
-                    using (FileStream fs = File.Open(ofdCarRepoOpen.FileName, FileMode.Open, FileAccess.Read)) {
-                        CarReports = (BindingList<CarReport>)bf.Deserialize(fs);
-                        dgvCarReports.DataSource = null;
-                        dgvCarReports.DataSource = CarReports;
-
-                        editItemsClear();
-                        dgvCarReports.Columns[5].Visible = false;   //画像項目非表示
-                        foreach (var carReport in CarReports) {
-                            setCbAuther(carReport.Author);
-                            setCbCarName(carReport.CarName);
-                        }
-                    }
-                }
-                catch (Exception ex) {
-                    MessageBox.Show(ex.Message);
-                }
-
-            }
+           
         }
 
         private void carReportTableBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
@@ -339,35 +302,3 @@ namespace CarReportSystem {
         }
     }
 }
-
-/*private void label2_Click(object sender, EventArgs e) {
-
-}
-
-private void textBox1_TextChanged(object sender, EventArgs e) {
-
-}
-
-private void btImageDelete_Click(object sender, EventArgs e) {
-
-}
-
-private void label7_Click(object sender, EventArgs e) {
-
-}
-
-private void tsInfoText_Click(object sender, EventArgs e) {
-            
-}
-
-private void button4_Click(object sender, EventArgs e) {
-
-}
-
-private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
-
-}
-
-private void groupBox1_Enter(object sender, EventArgs e) {
-
-}*/
