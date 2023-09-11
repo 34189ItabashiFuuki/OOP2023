@@ -295,6 +295,10 @@ namespace CarReportSystem {
             this.tableAdapterManager.UpdateAll(this.infosys202320DataSet);
         }
 
+        private void 接続ToolStripMenuItem_Click(object sender, EventArgs e) {
+            dbConnection();
+        }
+
         private void dbConnection() {
             // TODO: このコード行はデータを 'infosys202320DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportTableTableAdapter.Fill(this.infosys202320DataSet.CarReportTable);
@@ -306,10 +310,20 @@ namespace CarReportSystem {
             }
         }
 
-        private void 接続ToolStripMenuItem_Click(object sender, EventArgs e) {
-            dbConnection();
+        private void AutherSearch_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByAuther(this.infosys202320DataSet.CarReportTable, AutherSearch.Text);
         }
 
-        
+        private void CarNameSearch_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByCarName(this.infosys202320DataSet.CarReportTable, CarNameSearch.Text);
+        }
+
+        private void DateSearch_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByDate(this.infosys202320DataSet.CarReportTable, DateSearch.Text);
+        }
+
+        private void Reset_Click(object sender, EventArgs e) {
+
+        }
     }
 }
