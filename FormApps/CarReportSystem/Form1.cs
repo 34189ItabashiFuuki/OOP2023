@@ -182,13 +182,17 @@ namespace CarReportSystem {
                 setSelectedMaker(dgvCarReports.CurrentRow.Cells[3].Value.ToString());
                 cbCarName.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
                 tbReport.Text = dgvCarReports.CurrentRow.Cells[5].Value.ToString();
-                if (!dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)) {
-                    pbCarImage.Image = ByteArrayToImage((Byte[])dgvCarReports.CurrentRow.Cells[6].Value);
-                }
-                else {
-                    pbCarImage.Image = null;
-                }
+
+                pbCarImage.Image = !dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)
+                                        && ((Byte[])dgvCarReports.CurrentRow.Cells[6].Value).Length != 0 ?
+                                    ByteArrayToImage((Byte[])dgvCarReports.CurrentRow.Cells[6].Value) : null;
                 
+                //if (!dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)) {
+                //    pbCarImage.Image = ByteArrayToImage((Byte[])dgvCarReports.CurrentRow.Cells[6].Value);
+                //}
+                //else {
+                //    pbCarImage.Image = null;
+                //}
 
                 btModifyReport.Enabled = true; //修正ボタン有効
                 btDeleteReport.Enabled = true; //削除ボタン有効
@@ -280,13 +284,16 @@ namespace CarReportSystem {
             tstimetext.Text = DateTime.Now.ToString("HH時mm分ss秒");
         }
 
-        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+        /*private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
             
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
-           
-        }
+           foreach (var carReport in CarReports) {
+                            setCbAuther(carReport.Author);
+                            setCbCarName(carReport.CarName);
+                        }
+        }*/
 
         private void carReportTableBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
             this.Validate();
@@ -299,6 +306,15 @@ namespace CarReportSystem {
             // TODO: このコード行はデータを 'infosys202320DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportTableTableAdapter.Fill(this.infosys202320DataSet.CarReportTable);
             dgvCarReports.ClearSelection(); //選択解除
+            
+            foreach (var carReport in infosys202320DataSet.CarReportTable) {
+                setCbAuther(carReport.Author);
+                setCbCarName(carReport.CarName);
+            }
+        }
+
+        private void dgvCarReports_Validating(object sender, CancelEventArgs e) {
+
         }
     }
 }
