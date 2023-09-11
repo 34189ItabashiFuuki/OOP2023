@@ -294,32 +294,22 @@ namespace CarReportSystem {
             this.carReportTableBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202320DataSet);
         }
-        
-        //接続ボタン
-        private void button1_Click(object sender, EventArgs e) {
+
+        private void dbConnection() {
             // TODO: このコード行はデータを 'infosys202320DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportTableTableAdapter.Fill(this.infosys202320DataSet.CarReportTable);
             dgvCarReports.ClearSelection(); //選択解除
-            
+
             foreach (var carReport in infosys202320DataSet.CarReportTable) {
                 setCbAuther(carReport.Author);
                 setCbCarName(carReport.CarName);
             }
-        }
-
-        private void dgvCarReports_Validating(object sender, CancelEventArgs e) {
-
         }
 
         private void 接続ToolStripMenuItem_Click(object sender, EventArgs e) {
-            // TODO: このコード行はデータを 'infosys202320DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
-            this.carReportTableTableAdapter.Fill(this.infosys202320DataSet.CarReportTable);
-            dgvCarReports.ClearSelection(); //選択解除
-
-            foreach (var carReport in infosys202320DataSet.CarReportTable) {
-                setCbAuther(carReport.Author);
-                setCbCarName(carReport.CarName);
-            }
+            dbConnection();
         }
+
+        
     }
 }
