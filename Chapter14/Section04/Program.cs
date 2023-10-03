@@ -33,7 +33,7 @@ namespace Section04 {
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
                 var uriString = string.Format(
-                    @"http://news.yahoo.co.jp/rss/topics/it.xml", cityCode);
+                    @"https://news.yahoo.co.jp/rss/media/soccerk/all.xml", cityCode);
                 var url = new Uri(uriString);
                 var stream = wc.OpenRead(url);
 
