@@ -33,16 +33,16 @@ namespace RssReader {
             // tbUrl
             // 
             this.tbUrl.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbUrl.Location = new System.Drawing.Point(35, 12);
+            this.tbUrl.Location = new System.Drawing.Point(12, 7);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(706, 31);
+            this.tbUrl.Size = new System.Drawing.Size(522, 31);
             this.tbUrl.TabIndex = 0;
             // 
             // btGet
             // 
-            this.btGet.Location = new System.Drawing.Point(747, 12);
+            this.btGet.Location = new System.Drawing.Point(540, 7);
             this.btGet.Name = "btGet";
-            this.btGet.Size = new System.Drawing.Size(95, 31);
+            this.btGet.Size = new System.Drawing.Size(92, 31);
             this.btGet.TabIndex = 1;
             this.btGet.Text = "取得";
             this.btGet.UseVisualStyleBackColor = true;
@@ -53,27 +53,26 @@ namespace RssReader {
             this.lbRssTitle.Font = new System.Drawing.Font("UD デジタル 教科書体 NP-R", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbRssTitle.FormattingEnabled = true;
             this.lbRssTitle.ItemHeight = 18;
-            this.lbRssTitle.Location = new System.Drawing.Point(35, 49);
+            this.lbRssTitle.Location = new System.Drawing.Point(12, 97);
             this.lbRssTitle.Name = "lbRssTitle";
-            this.lbRssTitle.Size = new System.Drawing.Size(807, 130);
+            this.lbRssTitle.Size = new System.Drawing.Size(620, 544);
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.SelectedIndexChanged += new System.EventHandler(this.lbRssTitle_SelectedIndexChanged);
             // 
             // wbBrowser
             // 
-            this.wbBrowser.Location = new System.Drawing.Point(35, 191);
+            this.wbBrowser.Location = new System.Drawing.Point(638, 7);
             this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbBrowser.Name = "wbBrowser";
             this.wbBrowser.ScriptErrorsSuppressed = true;
-            this.wbBrowser.Size = new System.Drawing.Size(807, 655);
+            this.wbBrowser.Size = new System.Drawing.Size(678, 634);
             this.wbBrowser.TabIndex = 3;
-            //this.wbBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbBrowser_DocumentCompleted);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(888, 858);
+            this.ClientSize = new System.Drawing.Size(1328, 656);
             this.Controls.Add(this.wbBrowser);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);

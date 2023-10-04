@@ -20,23 +20,37 @@ namespace RssReader {
         }
 
         private void btGet_Click(object sender, EventArgs e) {
-            using (var wc = new WebClient()) {
-                var url = wc.OpenRead(tbUrl.Text);
-                XDocument xdoc = XDocument.Load(url);
+            try {
+                if (tbUrl.Text == "")
+                    return;
 
-                ItemDatas = xdoc.Root.Descendants("item")
-                                        .Select(x => new ItemData {
-                                            Title = (string)x.Element("title"),
-                                            Link = (string)x.Element("link")
-                                        }).ToList();
+                //リストボックスクリア
+                lbRssTitle.Items.Clear();
 
-                foreach (var node in ItemDatas) {
-                    lbRssTitle.Items.Add(node.Title);
-                }
+                using (var wc = new WebClient()) {
+                    var url = wc.OpenRead(tbUrl.Text);
+                    XDocument xdoc = XDocument.Load(url);
+
+                    ItemDatas = xdoc.Root.Descendants("item")
+                                            .Select(x => new ItemData {
+                                                Title = (string)x.Element("title"),
+                                                Link = (string)x.Element("link")
+                                            }).ToList();
+
+                    foreach (var node in ItemDatas) {
+                        lbRssTitle.Items.Add(node.Title);
+                    }
+
+                } 
+            }
+            catch (Exception) {
+
             }
         }
 
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
+            if (lbRssTitle.SelectedIndex == -1)
+                return;
             wbBrowser.Navigate(ItemDatas[lbRssTitle.SelectedIndex].Link);
         }
 
