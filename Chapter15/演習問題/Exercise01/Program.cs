@@ -39,13 +39,64 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4() {
-            
+            var publishedyear = Library.Books.Join(Library.Categories,
+                                                    book => book.CategoryId,
+                                                    category => category.Id,
+                                                    (book, category) => new {
+                                                        book.PublishedYear,
+                                                        book.Price,
+                                                        book.Title,
+                                                        CategoryName = category.Name,
+                                                    })
+                                                    .OrderByDescending(x => x.PublishedYear)
+                                                    .ThenByDescending(x => x.Price);
+            foreach (var p in publishedyear) {
+                Console.WriteLine("{0}年 {1}円 {2} ({3})",
+                                    p.PublishedYear,
+                                    p.Price,
+                                    p.Title,
+                                    p.CategoryName);
+            }
         }
 
         private static void Exercise1_5() {
+            var publishedyear = Library.Books.Where(b => b.PublishedYear == 2016)
+                                           .Join(Library.Categories,
+                                           book => book.CategoryId,
+                                           category => category.Id,
+                                           (book, category) => category.Name)
+                                           .Distinct();
+            foreach (var name in publishedyear) {
+                Console.WriteLine(name);
+            }
         }
 
         private static void Exercise1_6() {
+            var query = Library.Books.Join(Library.Categories,
+                                                    book => book.CategoryId,
+                                                    category => category.Id,
+                                                    (book, category) => new {
+                                                        book.PublishedYear,
+                                                        book.Price,
+                                                        book.Title,
+                                                        CategoryName = category.Name,
+                                                    })
+                                                    .GroupBy(x => x.CategoryName)
+                                                    .OrderBy(x => x.Key);
+
+            foreach (var group in query) {
+                Console.WriteLine("#{0}", group.Key);
+                foreach(var item in group) {
+                    Console.WriteLine(" {0}", item.Title);
+                }
+            }
+
+
+
+
+
+
+
         }
 
         private static void Exercise1_7() {
