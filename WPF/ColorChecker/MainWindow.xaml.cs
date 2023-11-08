@@ -46,12 +46,12 @@ namespace ColorChecker {
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
-            if () {
+            //if () {
 
-            }
-            else {
+            //}
+            //else {
                 stockList.Items.Insert(0, "R:　"+ rValue.Text + "　G:　" + gValue.Text + "　B:　" + bValue.Text);
-            }
+            //}
             
 
             
