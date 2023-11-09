@@ -8,29 +8,29 @@
         Title="Sample converter" SizeToContent="WidthAndHeight" 
         FontSize="20" FontFamily="Segoe UI Light">
     <Window.DataContext>
-        <SampleUnitConverter:MainWindowViewModel />
+        <SampleUnitConverter:WheightMainWindowViewModel />
     </Window.DataContext>
 
     <StackPanel Margin="4">
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Margin="4"
-                     Text="{Binding ImperialValue, StringFormat={}{0:N3}}"/>
+                     Text="{Binding GramValue, StringFormat={}{0:N6}}"/>
             <ComboBox Width="80" Margin="4" 
-                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:MetricUnit.Units}}"
-                      SelectedItem="{Binding CurrentMetricUnit}"/>
+                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:GramUnit.Units}}"
+                      SelectedItem="{Binding CurrentGramUnit}"/>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-            <Button Width="40" Margin="4" Content="▲" Command="{Binding ImperialUnitToMetric}"/>
-            <Button Width="40" Margin="4" Content="▼" Command="{Binding MetricToImperialUnit}"/>
+            <Button Width="40" Margin="4" Content="▲" Command="{Binding PoundUnitToGram}"/>
+            <Button Width="40" Margin="4" Content="▼" Command="{Binding GramToPoundUnit}"/>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Margin="4"
-                       Text="{Binding ImperialValue, StringFormat={}{0:N3}}"/>
+                       Text="{Binding PoundValue, StringFormat={}{0:N6}}"/>
             <ComboBox Width="80" Margin="4"
-                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:ImperialUnit.Units}}"
-                      SelectedItem="{Binding CurrentImperialUnit}"/>
+                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:PoundUnit.Units}}"
+                      SelectedItem="{Binding CurrentPoundUnit}"/>
         </StackPanel>
     </StackPanel>
 </Window>
